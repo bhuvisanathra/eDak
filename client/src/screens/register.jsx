@@ -4,8 +4,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { isAuth } from "../helpers/auth";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import "../styles/Components.css";
-import "../styles/queries.css";
 
 const Register = () => {
     const [formData, setFormData] = useState({
