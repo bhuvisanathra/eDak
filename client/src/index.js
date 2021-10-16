@@ -8,18 +8,42 @@ import Login from "./screens/login";
 import Forgot from "./screens/forgot";
 import Activate from "./screens/activate";
 import Reset from "./screens/reset";
+import Profile from "./screens/profile";
 import "react-toastify/dist/ReactToastify.css";
+import "./styles/index.css";
+import "./styles/Components.css";
 
 ReactDOM.render(
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact render={props => <App {...props}/>}/>
-        <Route path="/register" exact render={props => <Register {...props}/>}/>
-        <Route path="/login" exact render={props => <Login {...props}/>}/>
-        <Route path="/users/password/forgot" exact render={props => <Forgot {...props}/>}/>
-        <Route path="/users/activate/:token" exact render={props => <Activate {...props}/>}/>
-        <Route path="/users/password/reset/:token" exact render={props => <Reset {...props}/>}/>
-      </Switch>
-    </BrowserRouter>,
-  document.getElementById('root')
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" exact render={(props) => <App {...props} />} />
+      <Route
+        path="/register"
+        exact
+        render={(props) => <Register {...props} />}
+      />
+      <Route path="/login" exact render={(props) => <Login {...props} />} />
+      <Route
+        path="/users/password/forgot"
+        exact
+        render={(props) => <Forgot {...props} />}
+      />
+      <Route
+        path="/users/activate/:token"
+        exact
+        render={(props) => <Activate {...props} />}
+      />
+      <Route
+        path="/users/password/reset/:token"
+        exact
+        render={(props) => <Reset {...props} />}
+      />
+      <Route 
+        path="/profile" 
+        exact 
+        render={(props) => <Profile {...props} />}
+      />
+    </Switch>
+  </BrowserRouter>,
+  document.getElementById("root")
 );

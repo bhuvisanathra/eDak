@@ -1,11 +1,8 @@
 import React from "react";
+import Welcome from "./screens/Welcome";
 
 function App() {
-  return (
-    <div className="App">
-      eDak
-    </div>
-  );
+  return <Welcome />;
 }
 
 export default App;

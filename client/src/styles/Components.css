@@ -1,0 +1,298 @@
+/* Welcome Page */
+
+#main-page {
+  height: 100vh;
+}
+
+.wrapper,
+.user-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+}
+
+.user-wrapper {
+  align-items: center;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7em;
+  padding: 0 5px;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 70%;
+}
+
+.logo-wrapper h1 {
+  font-size: 35px;
+  letter-spacing: 2px;
+  font-weight: 900;
+}
+
+#logo {
+  width: 25%;
+  height: auto;
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2em;
+  width: 30%;
+}
+
+.button-wrapper.mobile {
+  display: none;
+}
+
+.showcase {
+  display: flex;
+  align-items: center;
+  height: 80vh;
+}
+
+.showcase-image {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 55%;
+  height: 100%;
+}
+
+.showcase-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 45%;
+}
+
+.showcase-text h1 {
+  font-size: 8vw;
+  font-weight: 900;
+  line-height: 1em;
+  color: var(--accent);
+  text-align: justify;
+  line-height: 1.17;
+}
+
+.showcase-text p {
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+  color: var(--white);
+  margin: 30px auto;
+}
+
+.showcase-image img {
+  width: 70%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Login And Sign Up */
+.form-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.illustration {
+  width: 25%;
+  height: 100%;
+  background: url(../assets/login.svg) no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.sign-up {
+  background: url(../assets/sign-up.svg) no-repeat center;
+  background-size: cover;
+}
+
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  height: 100%;
+}
+
+.inner-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  width: 285px;
+  gap: 1.8em;
+}
+
+.inner-form-wrapper h1 {
+  color: var(--accent);
+  font-size: 25px;
+}
+
+.inner-form-wrapper p {
+  font-size: 13px;
+}
+
+.inner-form-wrapper span,
+.pswd {
+  cursor: pointer;
+}
+
+.inner-form-wrapper label {
+  font-size: 14px;
+}
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5em;
+}
+
+.field-wrapper input,
+.field-wrapper textarea,
+.field-wrapper select {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  border: 1px solid #eeeeeeab;
+  color: var(--white);
+  border-radius: 6px;
+  background: none;
+  padding: 10px;
+}
+
+.btn-wrapper {
+  width: 100%;
+}
+
+.btn-wrapper button {
+  width: 100%;
+  height: 38px;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-wrapper a {
+  padding: 1em 10em;
+}
+
+/* Activation and Forgot Page */
+
+.activate-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  width: 75%;
+  height: 100%;
+}
+
+.activate-wrapper h1 {
+  margin: 1em auto;
+}
+
+.illustration.activate {
+  width: 25%;
+  height: 100%;
+  background: url(../assets/activate.jpeg) no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.activate-wrapper form {
+  width: 330px;
+  text-align: center;
+}
+
+.activate-text {
+  margin: 1em auto;
+}
+
+.forgot {
+  margin-bottom: 1.3em;
+}
+
+/* User Profile Page */
+.field-wrapper.img {
+  align-items: center;
+}
+
+.user-img {
+  width: 40%;
+}
+
+.field-wrapper textarea {
+  min-height: 100px;
+  max-height: 120px;
+  resize: vertical;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.field-wrapper.row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3em;
+}
+
+.col {
+  width: 45%;
+}
+
+.col input,
+.col select {
+  margin-top: 0.5em;
+}
+
+select {
+  appearance: none;
+}
+
+option {
+  background: var(--bg);
+  color: var(--white);
+}
+
+.continue {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.continue button {
+  width: 35%;
+}
+
+/* Topics of interests */
+.topics {
+  flex-direction: row;
+  gap: 1em;
+}
+
+.topics input {
+  width: 70%;
+}
+
+.topics button {
+  height: 40px;
+}
