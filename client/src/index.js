@@ -39,7 +39,7 @@ ReactDOM.render(
         render={(props) => <Reset {...props} />}
       />
       <Route 
-        path="/profile" 
+        path="/users/profile/:token" 
         exact 
         render={(props) => <Profile {...props} />}
       />

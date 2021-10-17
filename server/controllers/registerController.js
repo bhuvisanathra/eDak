@@ -70,7 +70,7 @@ const registerController = (req, res) => {
             html: 
              `
                 <h1>Click the link to activate your account</h1>
-                <p>${process.env.CLIENT_URL}/users/activate/${token}</p>
+                <p>${process.env.CLIENT_URL}/users/profile/${token}</p>
                 <hr>
                 <p>This email contains sensitive information</p>
                 <p>${process.env.CLIENT_URL}</p>

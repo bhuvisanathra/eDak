@@ -51,7 +51,7 @@ const Activate = ({ match }) => {
         <form onSubmit={handleSubmit}>
           <div className="btn-wrapper">
             <button type="submit" className="btn">
-              <a href="/profile">Activate</a>
+              Activate
             </button>
           </div>
           <div className="activate-text">

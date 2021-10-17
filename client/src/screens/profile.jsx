@@ -1,28 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import User from "../assets/user.png";
 import { arrTopics, arrLanguages } from "../helpers/data";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import jwt from "jsonwebtoken";
+import { isAuth } from "../helpers/auth";
+import { Redirect } from "react-router-dom";
 
-const Profile = () => {
+const Profile = ({match}) => {
   const [count, setCount] = useState(1);
 
   const [formData, setFormData] = useState({
+    email: "",
+    token: "",
     username: "",
     bio: "",
     dateOfBirth: "",
     gender: "",
     topics: [],
     languages: [],
+    show: true
   });
 
-  const { username, bio, dateOfBirth, gender } = formData;
+  useEffect(() => {
+    let token = match.params.token;
+    let { email } = jwt.decode(token);
+
+    if (token) {
+      setFormData({ ...formData, email, token });
+    }
+  }, [match.params]);
+
+  const { email, token, show, username, bio, dateOfBirth, gender, topics, languages } = formData;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCount(count + 1);
-    if (count > 1) {
-      errorHandling(count);
-    }
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/users/profile`, {
+        email,
+        token,
+        username,
+        bio,
+        dateOfBirth,
+        gender,
+        topics,
+        languages
+      })
+      .then((res) => {
+        setFormData({
+          ...formData,
+           show: false,
+           email: "",
+           username: "",
+           bio: "",
+           dateOfBirth: "",
+           gender: "",
+           topics: [],
+           languages: [] 
+        });
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.error);
+      });
   };
 
   const handleChange = (type) => (e) => {
@@ -30,6 +70,13 @@ const Profile = () => {
       setFormData({ ...formData, [type]: e.target.value });
     }
   };
+
+  const increaseCount = (count) => {
+    setCount(count + 1);
+    if (count > 1) {
+      errorHandling(count);
+    }
+  }
 
   const errorHandling = (count) => {
     if (count === 2) {
@@ -156,7 +203,7 @@ const Profile = () => {
                 </button>
               </div>
               <div className="btn-wrapper continue">
-                <button className="btn" onClick={() => setCount(count - 1)}>
+                <button className="btn" onClick={increaseCount(count)}>
                   Back
                 </button>
                 <button type="submit" className="btn">
@@ -186,7 +233,7 @@ const Profile = () => {
                 </button>
               </div>
               <div className="btn-wrapper continue">
-                <button className="btn" onClick={() => setCount(count - 1)}>
+                <button className="btn" onClick={increaseCount(count)}>
                   Back
                 </button>
                 <button className="btn" type="submit">

@@ -9,6 +9,59 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true
     },
+    username: {
+        type: String,
+        trim: true,
+        required: true,
+        unique: true,
+        minLength: 5,
+        maxLength: 14
+    },
+    bio: {
+        type: String,
+    },
+    gender: {
+        type: String, 
+        required: true,
+        maxLength: 6
+    },
+    languages: [
+        {
+            type: String, 
+            maxLength: 188
+        }
+    ],
+    interests: [
+        {
+            type: String,
+            required: true, 
+            maxLength: 96
+        }
+    ],
+    location: {
+        type: {
+          type: String, 
+          enum: ['Point'], 
+          required: true
+        },
+        coordinates: {
+          type: [Number],
+          required: true
+        }
+    },
+    dateOfBirth: {
+        type: Date,
+        required: true,
+        trim: true,
+    },
+    userProfileImage: {
+        data: Buffer, 
+        contentType: String
+    }, 
+    fiendList: {
+        type: Array, 
+        default: []
+    },
     hashed_password: {
         type: String,
         required: true,
@@ -54,4 +107,3 @@ userSchema.methods = {
 const User = mongoose.model("User", userSchema);
 
 export default User;
-
