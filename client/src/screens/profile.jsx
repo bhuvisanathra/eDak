@@ -4,12 +4,11 @@ import { arrTopics, arrLanguages } from "../helpers/data";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import { isAuth } from "../helpers/auth";
-import { Redirect } from "react-router-dom";
+// import { isAuth } from "../helpers/auth";
+// import { Redirect } from "react-router-dom";
 
-const Profile = ({match}) => {
-  const [count, setCount] = useState(1);
 
+const Profile = ({ match }) => {
   const [formData, setFormData] = useState({
     email: "",
     token: "",
@@ -27,7 +26,7 @@ const Profile = ({match}) => {
     let { email } = jwt.decode(token);
 
     if (token) {
-      setFormData({ ...formData, email, token });
+      setFormData({ ...formData, email: email, token: token });
     }
   }, [match.params]);
 
@@ -35,8 +34,9 @@ const Profile = ({match}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     axios
-      .post(`${process.env.REACT_APP_API_URL}/users/profile`, {
+      .post(`${process.env.REACT_APP_API_URL}/users/profile/:token`, {
         email,
         token,
         username,
@@ -71,27 +71,34 @@ const Profile = ({match}) => {
     }
   };
 
-  const increaseCount = (count) => {
+  const [count, setCount] = useState(1);
+
+  const increaseCount = () => {
     setCount(count + 1);
+    console.log(count);
     if (count > 1) {
-      errorHandling(count);
+      errorHandling();
     }
   }
 
-  const errorHandling = (count) => {
+  const decreaseCount = () => {
+    if(count > 1) { setCount(count - 1); }
+  }
+
+  const errorHandling = () => {
     if (count === 2) {
       if (formData.topics.length < 5) {
         toast.error(
           `Only ${formData.topics.length} Topics Added, Minimum 5 Required!`
         );
-        setCount(count--);
+        setCount(2);
       }
     } else if (count === 3) {
       if (formData.languages.length < 1) {
         toast.error(
           `Only ${formData.languages.length} Languages Selected, Minimum 1 Required!`
         );
-        setCount(count--);
+        setCount(2);
       }
     }
   };
@@ -113,7 +120,6 @@ const Profile = ({match}) => {
         toast.error(`${data} is already added`);
       }
     }
-    console.log(formData);
   };
 
   return (
@@ -121,7 +127,7 @@ const Profile = ({match}) => {
       <ToastContainer autoClose={1700} />
       <div className="login-wrapper">
         {count === 1 ? (
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="inner-form-wrapper">
               <div className="field-wrapper img">
                 <img src={User} alt="user-profile" className="user-img" />
@@ -162,7 +168,7 @@ const Profile = ({match}) => {
                     onChange={handleChange("gender")}
                     value={gender}
                     required>
-                    <option value="Male" selected>
+                    <option value="Male" defaultValue>
                       Male
                     </option>
                     <option value="Female">Female</option>
@@ -175,16 +181,16 @@ const Profile = ({match}) => {
                 <button className="btn" disabled={count < 2}>
                   Back
                 </button>
-                <button type="submit" className="btn">
+                <button className="btn" type="button" onClick={increaseCount}>
                   Continue
                 </button>
               </div>
             </div>
-          </form>
+            </form>
         ) : null}
 
         {count === 2 ? (
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="inner-form-wrapper">
               <h1>Topics Of Interests</h1>
               <div className="field-wrapper topics">
@@ -203,15 +209,15 @@ const Profile = ({match}) => {
                 </button>
               </div>
               <div className="btn-wrapper continue">
-                <button className="btn" onClick={increaseCount(count)}>
+                <button className="btn" onClick={decreaseCount}>
                   Back
                 </button>
-                <button type="submit" className="btn">
+                <button className="btn" type="button" onClick={increaseCount}>
                   Continue
                 </button>
               </div>
             </div>
-          </form>
+            </form>
         ) : null}
 
         {count === 3 ? (
@@ -233,16 +239,17 @@ const Profile = ({match}) => {
                 </button>
               </div>
               <div className="btn-wrapper continue">
-                <button className="btn" onClick={increaseCount(count)}>
+                <button className="btn" onClick={decreaseCount}>
                   Back
                 </button>
-                <button className="btn" type="submit">
+                <button type="submit" className="btn">
                   Submit
                 </button>
               </div>
             </div>
-          </form>
+            </form>
         ) : null}
+
       </div>
     </div>
   );
