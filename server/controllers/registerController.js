@@ -40,13 +40,17 @@ const registerController = (req, res) => {
                 email,
                 password
             },
-                process.env.JWT_ACCOUNT_ACTIVATION,
+            process.env.JWT_ACCOUNT_ACTIVATION,
             {
                 expiresIn: '5m'
             }
         );
 
-        const transport = { 
+        const transport = {
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: false,
+            ingoreTLS: false,
             service: "Gmail",
             auth: {
                 user: from_email,
@@ -58,17 +62,18 @@ const registerController = (req, res) => {
 
         transporter.verify((error, success) => {
             if (error) {
-              console.log(error);
+                console.log(error);
             } else {
-              console.log('Server is ready to take messages');
-        }});
+                console.log('Server is ready to take messages');
+            }
+        });
 
         const emailData = {
             from: process.env.FROM_EMAIL,
             to: email,
             subject: 'Account Activation Link',
-            html: 
-             `
+            html:
+                `
                 <h1>Click the link to activate your account</h1>
                 <p>${process.env.CLIENT_URL}/users/profile/${token}</p>
                 <hr>
@@ -79,13 +84,13 @@ const registerController = (req, res) => {
 
         transporter.sendMail(emailData, function (error, info) {
             if (error) {
-              console.log(error);
+                console.log(error);
             } else {
-              console.log('Email sent: ' + info.response);
-      
-              return res.json({
-                message: `Email has been sent to ${email}`,
-              });
+                console.log('Email sent: ' + info.response);
+
+                return res.json({
+                    message: `Email has been sent to ${email}`,
+                });
             }
         });
     }
